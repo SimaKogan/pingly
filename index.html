@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pingly · HTTP Client</title>
+  <meta name="description" content="Pingly: a fast, private HTTP client in your browser. Send requests, inspect responses, copy as cURL." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="side">
+    <div class="brand"><span>⚡</span><b>Pingly</b></div>
+    <div class="side-h"><span>History</span><button id="clearHist" class="link">Clear</button></div>
+    <ul id="history" class="history"></ul>
+  </aside>
+
+  <main class="main">
+    <header class="bar">
+      <select id="method" aria-label="HTTP method">
+        <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option><option>HEAD</option><option>OPTIONS</option>
+      </select>
+      <input id="url" placeholder="https://api.example.com/items" spellcheck="false" aria-label="Request URL" />
+      <button id="send" class="send">Send</button>
+      <button id="theme" class="icon" title="Toggle theme" aria-label="Toggle theme">🌙</button>
+    </header>
+
+    <section class="card req">
+      <div class="tabs" data-tabs>
+        <button data-t="params" class="on">Params</button>
+        <button data-t="headers">Headers</button>
+        <button data-t="body">Body</button>
+        <button data-t="auth">Auth</button>
+        <span class="grow"></span>
+        <button id="copyCurl" class="ghost">Copy cURL</button>
+        <button id="copyFetch" class="ghost">Copy fetch</button>
+      </div>
+      <div class="panel on" data-p="params"><div id="params" class="kv"></div></div>
+      <div class="panel" data-p="headers"><div id="headers" class="kv"></div></div>
+      <div class="panel" data-p="body">
+        <select id="bodyType" aria-label="Body type"><option value="json">JSON</option><option value="text">Text</option></select>
+        <button id="beautify" class="ghost">Beautify</button>
+        <textarea id="body" spellcheck="false" placeholder='{ "hello": "world" }'></textarea>
+      </div>
+      <div class="panel" data-p="auth">
+        <label class="lbl">Bearer token</label>
+        <input id="token" type="password" placeholder="Token (stays in this browser)" autocomplete="off" />
+      </div>
+    </section>
+
+    <section class="card res">
+      <div class="status" id="status"><span class="muted">Response</span></div>
+      <div class="tabs" data-tabs>
+        <button data-t="rbody" class="on">Body</button>
+        <button data-t="rraw">Raw</button>
+        <button data-t="rheaders">Headers</button>
+        <span class="grow"></span>
+        <button id="copyRes" class="ghost">Copy</button>
+      </div>
+      <div class="panel on scroll" data-p="rbody"><pre id="rbody" class="out"><span class="muted">Hit <b>Send</b> (or Ctrl/⌘ + Enter) to see the response.</span></pre></div>
+      <div class="panel scroll" data-p="rraw"><pre id="rraw" class="out"></pre></div>
+      <div class="panel scroll" data-p="rheaders"><div id="rheaders" class="out"></div></div>
+    </section>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
